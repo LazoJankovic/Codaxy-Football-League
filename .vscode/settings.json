@@ -3,5 +3,93 @@
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+
+    "todo-tree.general.tags": [
+        "BUG",
+        "HACK",
+        "FIXME",
+        "TODO",
+        "LazarJ",
+        "AssetmaxInput",
+        "XXX",
+        "[ ]",
+        "[x]"
+    ],
+    "todo-tree.highlights.customHighlight": {
+        "TODO": {
+            "foreground": "#000000",
+            "background": "#00ff4c",
+            "iconColour": "#00ff4c",
+            "icon": "check-circle",
+            "gutterIcon": true
+        },
+        "FIXME": {
+            "foreground": "#000000",
+            "background": "#ff0000",
+            "iconColour": "#ff0000",
+            "icon": "x-circle",
+            "gutterIcon": true
+        },
+        "LazarJ": {
+            "foreground": "#000000",
+            "background": "#fffb00",
+            "iconColour": "#fffb00",
+            "icon": "alert",
+            "gutterIcon": true
+        },
+        "AssetmaxInput": {
+            "foreground": "#ffffff",
+            "background": "#002fff",
+            "iconColour": "#002fff",
+            "icon": "shield",
+            "gutterIcon": true
+        }
+    },
+  
+    "customizeUI.listRowHeight": 25,
+    "peacock.color": "blue",
+
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#3333ff",
+        "activityBar.activeBorder": "#600000",
+        "activityBar.background": "#3333ff",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#600000",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "sash.hoverBorder": "#3333ff",
+        "statusBar.background": "#0000ff",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#3333ff",
+        "statusBarItem.remoteBackground": "#0000ff",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#0000ff",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#0000ff99",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "editor.tokenColorCustomizations": {
+        //"types": "#f3f0f0",
+        // "comments": "#FF0000",
+        // "keywords": "#e90d0d",
+        // "numbers": "#FF0000",
+        "strings": "#e1d696e9",
+        //"variables": "#5c0202",
+        "functions": "#32df57",
+    },
+    "todohighlight.defaultStyle": {
+        "color": "red",
+        "backgroundColor": "red",
+        "overviewRulerColor": "#ffab00",
+        "cursor": "pointer",
+        "border": "1px solid #eee",
+        "borderRadius": "2px",
+        "isWholeLine": true,
+        //other styling properties goes here ... 
+    },
+    "customizeUI.fontSizeMap": {
+        "tab-title": "14px",
+        "menu": "14px",
+    }
 }
