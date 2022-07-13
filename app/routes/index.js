@@ -9,6 +9,7 @@ import SignIn from './pages/sign-in';
 import { SandboxedRoute } from '../components/SandboxedRoute';
 import InvoiceRoutes from './invoices';
 import { PageNotImplemented } from '../components/PageNotImplemented';
+import League from './league';
 
 export default () => (
    <cx>
@@ -22,6 +23,10 @@ export default () => (
          <RedirectRoute route="~/" redirect="~/dashboard" url-bind="url" />
 
          <CheckerLayout>
+            <Route route="~/season" url-bind="url" prefix>
+               <League />
+            </Route>
+
             <SandboxedRoute route="~/dashboard">
                <Dashboard />
             </SandboxedRoute>

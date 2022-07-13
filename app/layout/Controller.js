@@ -3,6 +3,24 @@ import { GET } from '../api/util/methods';
 
 export default {
     onInit() {
+        let seasons = [
+           {
+              name: 'Prva liga',
+              standings: {},
+              results: {},
+              players: { Mirko: {}, Zarko: {} },
+           },
+           {
+              name: 'Druga liga',
+              standings: {},
+              results: {},
+              players: { Mirko: {}, Zarko: {} },
+           },
+        ];
+
+        this.store.set('seasons', seasons);
+
+
         this.addTrigger('scroll-reset', ['url'], () => {
             document.scrollingElement.scrollTop = 0;
         });

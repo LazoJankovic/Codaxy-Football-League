@@ -1,4 +1,4 @@
-import { computable, History } from 'cx/ui';
+import { computable, History, Repeater } from 'cx/ui';
 import {
    Dropdown,
    HighlightedSearchText,
@@ -188,7 +188,26 @@ export const CheckerLayout = ({ children, nav }) => (
                </Dropdown>
             </div>
          </div>
+
          <div class="border-r pt-3">
+            <div class="px-6 py-3 text-gray-400 text-sm">Leagues</div>
+            <Repeater records-bind="seasons">
+               <NavItem
+                  text-bind="$record.name"
+                  icon="chart-bar"
+                  href={computable('$index', (index) => {
+                     return `~/season/${index + 1}`;
+                  })}
+               />
+
+               <p
+                  class="font-light text-center"
+                  text={computable('$index', (index) => {
+                     return 'Sezona ' + (index + 1);
+                  })}
+               />
+            </Repeater>
+
             <div class="px-6 py-3 text-gray-400 text-sm">Main Menu</div>
             <NavItem text="Dashboard" icon="chart-bar" href="~/dashboard" />
             <NavItem text="Invoices" icon="document-text" href="~/invoices" />
