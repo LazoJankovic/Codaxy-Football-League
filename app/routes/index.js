@@ -10,6 +10,7 @@ import { SandboxedRoute } from '../components/SandboxedRoute';
 import InvoiceRoutes from './invoices';
 import { PageNotImplemented } from '../components/PageNotImplemented';
 import League from './league';
+import NewLeague from './newLeague';
 
 export default () => (
    <cx>
@@ -25,6 +26,10 @@ export default () => (
          <CheckerLayout>
             <Route route="~/season" url-bind="url" prefix>
                <League />
+            </Route>
+
+            <Route route="~/newleague" url-bind="url" prefix>
+               <NewLeague />
             </Route>
 
             <SandboxedRoute route="~/dashboard">

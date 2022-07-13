@@ -1,5 +1,6 @@
 import { computable, History, Repeater } from 'cx/ui';
 import {
+   Button,
    Dropdown,
    HighlightedSearchText,
    Icon,
@@ -207,6 +208,8 @@ export const CheckerLayout = ({ children, nav }) => (
                   })}
                />
             </Repeater>
+
+            <NavItem text="Create new league" icon="adjustments" href="~/newleague" />
 
             <div class="px-6 py-3 text-gray-400 text-sm">Main Menu</div>
             <NavItem text="Dashboard" icon="chart-bar" href="~/dashboard" />
