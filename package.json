@@ -8,7 +8,8 @@
       "test": "echo \"Error: no test specified\" && exit 1",
       "start": "webpack-dev-server --config config/webpack.dev.js --open",
       "build": "webpack --config config/webpack.prod.js",
-      "analyze": "webpack --config config/webpack.analyze.js"
+      "analyze": "webpack --config config/webpack.analyze.js",
+      "tsc": "tsc"
    },
    "keywords": [],
    "author": "Marko Stijak",
@@ -30,6 +31,8 @@
       "react-dom": "^17.0.2",
       "regexparam": "^2.0.0",
       "tailwindcss": "^3.0.16",
+      "ts-standard": "^11.0.0",
+      "typescript": "^4.7.4",
       "whatwg-fetch": "^3.6.2"
    },
    "devDependencies": {
@@ -66,5 +69,8 @@
    },
    "msw": {
       "workerDirectory": "public"
+   },
+   "ts-standard": {
+      "project": "./tsconfig.json"
    }
 }

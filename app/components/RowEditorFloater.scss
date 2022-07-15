@@ -1,0 +1,26 @@
+.cxb-roweditorfloater {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    right: 0;
+}
+
+.cxe-roweditorfloater-floater {
+    position: fixed;
+    padding: $cx-default-box-padding;
+    z-index: 1;
+    border-style: solid;
+    border-color: $cx-default-border-color;
+    border-width: 0 1px 1px;
+};
+
+.cxs-cursor {
+    .cxe-roweditorfloater-floater {
+        background-color: #f7fbfe; // used because it cannot be transparent as their color in figma is (our is $primary-color-light-4x)
+    };
+    &.cxs-selected {
+        .cxe-roweditorfloater-floater {
+            background-color: #f7fbfe;
+        };
+    }
+}

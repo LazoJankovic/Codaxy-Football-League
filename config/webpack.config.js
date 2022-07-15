@@ -14,6 +14,7 @@ module.exports = ({ rootCssLoader, tailwindOptions }) => {
             //uncomment the line below to alias cx-react to cx-preact or some other React replacement library
             //'cx-react': 'cx-preact',
          },
+         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
 
       externals: {
@@ -24,7 +25,7 @@ module.exports = ({ rootCssLoader, tailwindOptions }) => {
       module: {
          rules: [
             {
-               test: /\.js$/,
+               test: /\.(js|ts|tsx)$/,
                //add here any ES6 based library
                include: [
                   p('common'),

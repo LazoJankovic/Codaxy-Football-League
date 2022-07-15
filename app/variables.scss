@@ -1,0 +1,312 @@
+// variables
+/**** Colors ****/
+$swatches_lightgrey: #F3F2F2;
+
+$eds-blue: #1a2880;
+$eds-blue-opaque-20: rgba(26, 40, 128, 0.2);
+$eds-grey: #2d2f30;
+$eds-grey-10: #eaeaea;
+$eds-grey-100: #2d2f30;
+$eds-grey-20: #d5d5d6;
+$eds-grey-40: #abacac;
+$eds-grey-50: #8C8C8C;
+$eds-grey-60: #818283;
+$eds-grey-80: #57585a;
+$eds-lime: #75bb24;
+$eds-lime-opaque-8: rgba($eds-lime, 0.08);
+$eds-lime-opaque-20: rgba($eds-lime, 0.2);
+$eds-lime-opaque-30: rgba($eds-lime, 0.3);
+$eds-magenta: #b21753;
+$eds-mauve: #600f7a;
+$eds-navigation: #002140;
+$eds-tangerine: #f75110;
+$eds-tangerine-opaque-5: rgba($eds-tangerine, 0.05);
+$eds-tangerine-opaque-10: rgba($eds-tangerine, 0.1);
+$eds-tangerine-opaque-30: rgba($eds-tangerine, 0.3);
+$eds-teal: #0e8581;
+$eds-yellow: #edf019;
+$eds-body-background-color: #F0F2F5;
+$eds-bg-color-light: rgba(#000, 0.02);
+
+$eds-data-equidistant-0: #1A2880;
+$eds-data-equidistant-0-opaque-3: rgba(#1A2880, 0.03);
+$eds-data-equidistant-0-opaque-5: rgba(#1A2880, 0.05);
+$eds-data-equidistant-0-opaque-10: rgba(#1A2880, 0.1);
+$eds-data-equidistant-0-opaque-50: rgba(#1A2880, 0.5);
+$eds-data-equidistant-1: hsl(232, 66%, 30%);
+$eds-data-equidistant-2: hsl(282, 58%, 33%);
+$eds-data-equidistant-3: hsl(313, 72%, 35%);
+$eds-data-equidistant-4: hsl(329, 78%, 44%);
+$eds-data-equidistant-5: hsl(345, 79%, 55%);
+$eds-data-equidistant-6: hsl(5, 97%, 63%);
+$eds-data-equidistant-7: hsl(23, 100%, 59%);
+$eds-data-equidistant-8: hsl(39, 100%, 50%);
+// my colors
+$eds-data-equidistant-9: hsl(55, 80%, 50%);
+$eds-data-equidistant-10: hsl(68, 70%, 45%);
+$eds-data-equidistant-11: hsl(85, 60%, 40%);
+$eds-data-equidistant-12: hsl(110, 55%, 35%);
+$eds-data-equidistant-13: hsl(135, 48%, 28%);
+$eds-data-equidistant-14: hsl(170, 55%, 35%);
+$eds-data-equidistant-15: hsl(200, 60%, 40%);
+$eds-data-equidistant-16: hsl(215, 65%, 44%);
+
+$eds-error-color: hsl(17, 94%, 52%);
+$eds-error-color-opaque-5: hsla(17, 94%, 52%, 0.05);
+$eds-evooq-mid-grey: #5c6771;
+$eds-evooq-dark-grey: rgba(0, 0, 0, 0.65); //#323e48;
+$eds-evooq-light-grey: #96a4ae;
+$eds-evooq-red: #e83c4d;
+$eds-evooq-pink: #ffb6b2;
+$eds-evooq-pink-light: #fff1f0;
+$eds-evooq-white: #ffffff;
+$eds-heading-color: rgba(0, 0, 0, 0.85);
+$eds-highlight-color: #f75110;
+$eds-info-color: #14d4ff;
+$eds-info-color-opaque-5: rgba($eds-info-color, 0.05);
+$eds-navigation-background-color: #002140;
+$eds-primary-color: #0076de;
+$eds-primary-color-opaque-3: rgba($eds-primary-color, 0.03);
+$eds-primary-color-opaque-10: rgba($eds-primary-color, 0.1);
+$eds-processing-color: #600f7a;
+
+$eds-success-color: #75bb24;
+$eds-success-color-opaque-10: rgba($eds-success-color, 0.1);
+$eds-swatches-green-glass-20: rgba(197, 255, 0, 0.2);
+$eds-swatches-orange-glass-20: rgba(254, 190, 65, 0.25);
+$eds-swatches-purple-glass-20: rgba(168, 121, 226, 0.2);
+$eds-swatchesblue: #0076de;
+$eds-swatchesblue-glass: rgba(0, 118, 222, 0.2);
+$eds-swatchesdarkgreen: #6aac00;
+$eds-swatchesdarkorange: #c17402;
+$eds-swatchesdarkpurple: #5c3c9f;
+$eds-swatchesgreen: #c5ff00;
+$eds-swatcheslightgrey: #f3f2f2;
+$eds-swatcheslightgrey-2: #dbdbdb;
+$eds-swatchesoffwhite: #f8f8f8;
+$eds-swatchesorange: #febe41;
+$eds-swatchespurple: #a879e2;
+$eds-swatchespurple-opaque-20: rgba($eds-swatchespurple, 0.2);
+$eds-swatchespurple-light-20: #EEE4F9;
+$eds-swatchesverydarkblue: #1456a3;
+$eds-swatchesverydarkgreen: #3f6500;
+$eds-swatchesverydarkorange: #5a3c00;
+$eds-swatchesverydarkpurple: #322157;
+$eds-text-color: rgba(0, 0, 0, 0.65);
+$eds-text-color-secondary: rgba(0, 0, 0, 0.45);
+$eds-warning-color: #FC9203;
+$eds-warning-color-opaque-10: rgba($eds-warning-color, 0.1);
+
+$eds-pending-color: #e8b2e5;//#B100AA;
+$eds-pending-color-bright: #B902A7;
+$eds-pending-color-light: #fbf2fb;
+$eds-pending-color-dark: #ce4ec1;
+
+$eds-breach-color: #F8C5CA;
+$eds-breach-color-bright: $eds-evooq-red;
+$eds-breach-color-light: lighten(#F8C5CA, 4);
+$eds-breach-color-dark: #EF7782;
+
+$eds-opportunity-color: #D2E6B3;
+$eds-opportunity-color-bright: $eds-swatchesdarkgreen;
+$eds-opportunity-color-light: #d2e6b2;
+$eds-opportunity-color-dark: #97C54D;
+
+// file colors
+$eds-file-pdf-color: #EA988D;
+$eds-file-excel-color: #71BD86;
+$eds-prospect-color: #AF1685;
+$eds-prospect-color-opaque-10: rgba($eds-prospect-color, 0.1);
+
+//Chart colors
+//$eds-data-equidistant-1: hsl(232, 66%, 30%);
+$eds-data-equidistant-1: $eds-primary-color;
+$eds-data-equidistant-2: hsl(282, 58%, 33%);
+$eds-data-equidistant-3: hsl(313, 72%, 35%);
+$eds-data-equidistant-4: hsl(329, 78%, 44%);
+$eds-data-equidistant-5: hsl(345, 79%, 55%);
+$eds-data-equidistant-6: hsl(5, 97%, 63%);
+$eds-data-equidistant-7: hsl(23, 100%, 59%);
+$eds-data-equidistant-8: hsl(39, 100%, 50%);
+// my colors
+$eds-data-equidistant-9: hsl(55, 80%, 50%);
+$eds-data-equidistant-10: hsl(68, 70%, 45%);
+$eds-data-equidistant-11: hsl(85, 60%, 40%);
+$eds-data-equidistant-12: hsl(110, 55%, 35%);
+$eds-data-equidistant-13: hsl(135, 48%, 28%);
+$eds-data-equidistant-14: hsl(170, 55%, 35%);
+$eds-data-equidistant-15: hsl(200, 60%, 40%);
+$eds-data-equidistant-16: hsl(215, 65%, 44%);
+
+
+/**** Fonts ****/
+/** body **/
+$body-font-family: "Gotham Book", 'Ubuntu', 'Ubuntu-Light';
+$body-font-size: 14px;
+$body-letter-spacing: 0px;
+$body-line-height: 150%;
+$body-font-weight: 300;
+$body-color: black;
+
+@mixin body() {
+    font-family: $body-font-family;
+    font-size: $body-font-size;
+    letter-spacing: $body-letter-spacing;
+    line-height: $body-line-height;
+    font-weight: $body-font-weight;
+    color: $body-color;
+}
+/** button-label **/
+$button-label-font-family: 'Ubuntu', 'Ubuntu-Light';
+$button-label-font-size: 14px;
+$button-label-letter-spacing: 0px;
+$button-label-line-height: 16px;
+$button-label-font-weight: 300;
+$button-label-color: black;
+
+@mixin button-label() {
+	font-family: $button-label-font-family;
+	font-size: $button-label-font-size;
+	letter-spacing: $button-label-letter-spacing;
+	line-height: $button-label-line-height;
+	font-weight: $button-label-font-weight;
+	color: $button-label-color;
+}
+/** h1 **/
+$h1-font-family: 'Ubuntu', 'Ubuntu';
+$h1-font-size: 24px;
+$h1-letter-spacing: 0px;
+$h1-line-height: 46px;
+$h1-font-weight: 400;
+$h1-color: black;
+
+@mixin h1() {
+	font-family: $h1-font-family;
+	font-size: $h1-font-size;
+	letter-spacing: $h1-letter-spacing;
+	line-height: $h1-line-height;
+	font-weight: $h1-font-weight;
+	color: $h1-color;
+}
+/** h2 **/
+$h2-font-family: 'Ubuntu', 'Ubuntu-Light';
+$h2-font-size: 20px;
+$h2-letter-spacing: 0px;
+$h2-line-height: 150%;
+$h2-font-weight: 300;
+$h2-color: black;
+
+@mixin h2() {
+	font-family: $h2-font-family;
+	font-size: $h2-font-size;
+	letter-spacing: $h2-letter-spacing;
+	line-height: $h2-line-height;
+	font-weight: $h2-font-weight;
+	color: $h2-color;
+}
+/** h3 **/
+$h3-font-family: 'Ubuntu', 'Ubuntu-Light';
+$h3-font-size: 16px;
+$h3-letter-spacing: 0px;
+$h3-line-height: 150%;
+$h3-font-weight: 400;
+$h3-color: black;
+
+@mixin h3() {
+	font-family: $h3-font-family;
+	font-size: $h3-font-size;
+	letter-spacing: $h3-letter-spacing;
+	line-height: $h3-line-height;
+	font-weight: $h3-font-weight;
+	color: $h3-color;
+}
+
+/** h4 **/
+$h4-font-family: 'Ubuntu', 'Ubuntu';
+$h4-font-size: 14px;
+$h4-letter-spacing: 0px;
+$h4-line-height: 150%;
+$h4-font-weight: 400;
+$h4-color: black;
+
+@mixin h4() {
+	font-family: $h4-font-family;
+	font-size: $h4-font-size;
+	letter-spacing: $h4-letter-spacing;
+	line-height: $h4-line-height;
+	font-weight: $h4-font-weight;
+	color: $h4-color;
+}
+/** link **/
+$link-font-family: 'Ubuntu', 'Ubuntu-Light';
+$link-font-size: 14px;
+$link-letter-spacing: 0px;
+$link-line-height: 16px;
+$link-font-weight: 300;
+$link-text-decoration: underline;
+$link-color: black;
+
+@mixin link() {
+	font-family: $link-font-family;
+	font-size: $link-font-size;
+	letter-spacing: $link-letter-spacing;
+	line-height: $link-line-height;
+	font-weight: $link-font-weight;
+	text-decoration: $link-text-decoration;
+	color: $link-color;
+}
+/** small **/
+$small-font-family: 'Ubuntu', 'Ubuntu-Light';
+$small-font-size: 12px;
+$small-letter-spacing: 0px;
+$small-line-height: 150%;
+$small-font-weight: 300;
+$small-color: black;
+
+@mixin small() {
+	font-family: $small-font-family;
+	font-size: $small-font-size;
+	letter-spacing: $small-letter-spacing;
+	line-height: $small-line-height;
+	font-weight: $small-font-weight;
+	color: $small-color;
+}
+/** regular **/
+$regular-font-family: 'Ubuntu', 'Ubuntu-Light';
+$regular-font-size: 12px;
+$regular-letter-spacing: 0px;
+$regular-line-height: 14px;
+$regular-font-weight: 300;
+$regular-color: black;
+
+@mixin regular() {
+	font-family: $regular-font-family;
+	font-size: $regular-font-size;
+	letter-spacing: $regular-letter-spacing;
+	line-height: $regular-line-height;
+	font-weight: $regular-font-weight;
+	color: $regular-color;
+}
+
+$eds-main-bg-color: #262626;
+$eds-xxl-font-size: 24px;
+$eds-xxl-line-height: 32px;
+// new colors
+$eds-border-color-split: rgba(#000, 0.06);
+$eds-background-color-lighter: #fafafa;
+$eds-border-color-base: rgba(#000, 0.15);
+$eds-text-color-secondary: rgba(#000, 0.45);
+$eds-text-color-secondary-light: rgba(#000, 0.25);
+$eds-text-color-disabled: rgba(#000, 0.25);
+$eds-background-color-light: rgba(#000, 0.02);
+$eds-main-bg-color: #262626;
+$eds-xxl-font-size: 24px;
+$eds-xxl-line-height: 32px;
+$eds-bg-color-base-4: rgba(#000, 0.04);
+
+// data
+$eds-evooq-data-4: #c71972;
+$eds-evooq-data-4-opaque: rgba(#c71972, 0.05);
+
+$eds-grid-highlight-color: $eds-data-equidistant-0-opaque-3;
+

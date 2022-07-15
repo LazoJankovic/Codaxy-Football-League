@@ -1,0 +1,1025 @@
+$sides: top right bottom left;
+$additional-sizes: (
+    none: 0,
+    extra-small: $main-layout-size-unit/4,
+    small: $main-layout-size-unit/2,
+    medium: 1.5 * $main-layout-size-unit,
+);
+$directions: vertical horizontal;
+$opposite-side-pairs: (
+    'left': 'right',
+    'top': 'bottom'
+);
+@function getOppositeSide($side) {
+    $opposite-side: '';
+
+    @each $key, $value in $opposite-side-pairs {
+        @if ($side == $key) {
+            $opposite-side: $value
+        } @else if $side == $value {
+            $opposite-side: $key
+        }
+    }
+
+    @return $opposite-side;
+};
+
+
+// FLEX
+%flex-column {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+%flex-row {
+    display: flex;
+    overflow: auto;
+}
+
+%flex-none { flex: 0 0 auto }
+
+// flex column
+.flex-column {
+    @extend %flex-column;
+
+    &.justify-top { justify-content: flex-start };
+    &.justify-center { justify-content: center };
+    &.justify-bottom { justify-content: flex-end };
+    &.justify-space-between { justify-content: space-between };
+    &.justify-space-around { justify-content: space-around };
+
+    &.align-left { align-items: flex-start };
+    &.align-center { align-items: center };
+    &.align-right { align-items: flex-end };
+    &.align-baseline { align-items: baseline };
+    &.align-bottom { align-items: end };
+
+    &.overflow-hidden { overflow: hidden }
+
+    .align-self-left { align-self: flex-start };
+    .align-self-right { align-self: flex-end };
+    .align-self-stretch { align-self: stretch };
+
+
+    &.wrap, &.flex-wrap { flex-wrap: wrap };
+};
+
+// flex row
+.flex-row {
+    @extend %flex-row;
+
+    &.justify-left { justify-content: flex-start };
+    &.justify-center { justify-content: center };
+    &.justify-right { justify-content: flex-end };
+    &.justify-space-between { justify-content: space-between };
+    &.justify-space-around { justify-content: space-around };
+
+    &.align-top { align-items: flex-start };
+    &.align-center { align-items: center };
+    &.align-baseline { align-items: baseline };
+    &.align-bottom { align-items: flex-end };
+
+    &.wrap, &.flex-wrap { flex-wrap: wrap };
+
+    &.reverse { flex-direction: row-reverse };
+
+    &.overflow-hidden { overflow: hidden };
+
+    .align-self-top { align-self: flex-start };
+    .align-self-bottom { align-self: flex-end };
+    .align-self-stretch { align-self: stretch };
+}
+
+// flex alignment
+.align-self-center { align-self: center };
+.align-self-baseline { align-self: baseline };
+.align-self-stretch { align-self: stretch };
+
+@for $i from 1 through 6 {
+    .flex-#{$i} {
+        flex: $i
+    }
+};
+
+.flex-none { @extend %flex-none };
+
+// flex placement
+@each $side in $sides {
+    $opposite-side: getOppositeSide($side);
+    .place-#{$side} {
+        margin-#{$opposite-side}: auto;
+
+        &-important {
+            margin-#{$opposite-side}: auto !important
+        }
+    }
+}
+
+// GAPS
+.gap {
+    gap: $main-layout-size-unit;
+    &-v {
+        gap: $main-layout-size-unit 0;
+    };
+    &-h {
+        gap: 0 $main-layout-size-unit;
+    }
+};
+
+@for $i from 2 through 12 {
+    .gap-#{$i}x {
+        gap: $i * $main-layout-size-unit;
+        &-v {
+            gap: $i * $main-layout-size-unit 0;
+        };
+        &-h {
+            gap: 0 $i * $main-layout-size-unit;
+        }
+    }
+};
+
+.gap-small {
+    gap: $main-layout-size-unit/2;
+};
+
+// ELLIPSIS
+%ellipsis {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+};
+
+.ellipsis { @extend %ellipsis };
+
+@mixin multiline-ellipsis($numLines: null) {
+    @if $numLines != null {
+        display: -webkit-box;
+        -webkit-line-clamp: $numLines;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    @else {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        display: block;
+    }
+};
+
+@for $numLines from 2 through 4 {
+    .multiline-ellipsis-#{$numLines} {
+        @include multiline-ellipsis($numLines)
+    }
+};
+
+//  WHITE SPACE
+.white-space-normal {
+    white-space: normal;
+    > span {
+        white-space: normal;
+    }
+};
+
+// GRID
+@mixin grid-layout (
+    $rowNumber: null,
+    $columnNumber: null,
+    $gridGap: $main-layout-size-unit,
+    $rowHeight: 10 * $main-layout-size-unit,
+    $rowHeightMax: null,
+    $rowHeightMin: null,
+    $rowTemplates: null,
+    $columnTemplates: null,
+    $dense: true
+) {
+    display: grid;
+    grid-gap: $gridGap;
+
+    @if $dense == true {
+        grid-auto-flow: dense;
+    };
+
+    @if $columnNumber != null { grid-template-columns: repeat($columnNumber, 1fr) };
+    @if $columnTemplates != null { grid-template-columns: $columnTemplates };
+
+    @if $rowNumber != null { grid-template-rows: repeat($rowNumber, $rowHeight) };
+    @if $rowHeightMax != null and $rowHeightMin != null { grid-template-rows: repeat($rowNumber, minmax($rowHeightMin, $rowHeightMax)) };
+    @if $rowTemplates != null {
+        grid-template-rows: $rowTemplates;
+    }
+};
+
+@for $i from 1 through 16 {
+    .grid-col-span-#{$i} { grid-column: span $i };
+    .grid-row-span-#{$i} { grid-row: span $i };
+    .grid-col-start-#{$i} { grid-column-start: $i };
+    .grid-col-end-#{$i} { grid-column-end: $i };
+    .grid-row-start-#{$i} { grid-row-start: $i };
+    .grid-row-end-#{$i} { grid-row-end: $i };
+}
+
+.grid-width-full {
+    grid-column-start: 1;
+    grid-column-end: -1;
+};
+
+// OLD-STYLE GRID
+@for $i from 1 through 24 {
+    .grid24-col-#{$i} {
+        flex: 0 0 round(100% * $i / 24);
+    }
+}
+
+// HEIGHT AND WIDTH
+// it's width-full and not full-width, because prop should go first, although it doesn't look nice linguistically
+// width
+.width-full {
+    width: 100% !important;
+    &-form {
+        .cxb-labelstoplayout {
+            width: 100%;
+        }
+    }
+};
+.width-half { width: 50% !important };
+.width-fit-content { width: fit-content !important; min-width: fit-content; };
+.width-max-content { width: max-content !important; };
+.width-unset {
+    width: unset;
+
+    &-important {
+        width: unset !important;
+    }
+};
+// height
+.height-full { height: 100% !important };
+.height-half { height: 50% !important };
+.height-half-vp { height: 50vh !important };
+.height-max-half-vp { max-height: 50vh !important };
+
+.height-fit-content {
+    height: fit-content !important;
+    height: -moz-fit-content !important; // firefox still doesn't support fit-content only
+};
+
+@for $i from 12 through 34 {
+    .height-#{$i} {
+        height: #{$i}px;
+    }
+}
+// BORDERS
+@each $side in $sides {
+    .border-#{$side} {
+        border-#{$side}: 1px solid $cx-default-border-color !important;
+    };
+    .border-#{$side}-light {
+        border-#{$side}: 1px solid $border-color-light !important;
+    };
+    .border-#{$side}-none {
+        border-#{$side}: none !important;
+    }
+};
+.border-all {
+    border: 1px solid $cx-default-border-color;
+
+    &-light {
+        border: 1px solid $border-color-light;
+    }
+}
+.border-transparent {
+    border-color: transparent !important;
+}
+.border-radius {
+    border-radius: $border-radius;
+}
+
+// MARGINS
+// @Ognjen remove !important here and add classes with -important sufix
+@for $i from 2 through 16 {
+    @each $side in $sides {
+        .margin-#{$side}-#{$i}x {
+            margin-#{$side}: $i * $main-layout-size-unit !important;
+        };
+    }
+    .margin-horizontal-#{$i}x {
+        margin-left: $i * $main-layout-size-unit !important;
+        margin-right: $i * $main-layout-size-unit !important;
+    }
+    .margin-vertical-#{$i}x {
+        margin-top: $i * $main-layout-size-unit !important;
+        margin-bottom: $i * $main-layout-size-unit !important;
+    }
+};
+
+@each $side in $sides {
+    @each $size-key, $size-value in $additional-sizes {
+        .margin-#{$side}-#{$size-key} {
+            margin-#{$side}: $size-value;
+
+            &-important {
+                margin-#{$side}: $size-value !important;
+            }
+        }
+    };
+
+    .margin-#{$side} {
+        margin-#{$side}: $main-layout-size-unit;
+
+        &-important {
+            margin-#{$side}: $main-layout-size-unit !important;
+        }
+    };
+
+    // negative
+    .margin-#{$side}-negative {
+        margin-#{$side}: - $main-layout-size-unit !important;
+    };
+    .margin-#{$side}-negative-small {
+        margin-#{$side}: - $main-layout-size-unit/2 !important;
+    };
+};
+
+.margin {
+    margin: $main-layout-size-unit;
+    &-important {
+        margin: $main-layout-size-unit !important;
+    };
+    &-none {
+        margin: 0;
+        &-important {
+            margin: 0 !important;
+        }
+    }
+};
+
+.margin-vertical {
+    margin-top: $main-layout-size-unit !important;
+    margin-bottom: $main-layout-size-unit !important;
+    &-none {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+};
+.margin-horizontal {
+    margin-left: $main-layout-size-unit !important;
+    margin-right: $main-layout-size-unit !important;
+    &-none {
+        margin-right: 0 !important;
+        margin-left: 0 !important
+    };
+};
+
+// PADDINGS
+// @Ognjen remove !important here and add classes with -important sufix
+@for $i from 2 through 10 {
+    @each $side in $sides {
+        .padding-#{$side}-#{$i}x {
+            padding-#{$side}: $i * $main-layout-size-unit !important;
+        }
+    }
+    .padding-#{$i}x {
+        padding: $i * $main-layout-size-unit !important;
+    }
+    .padding-horizontal-#{$i}x {
+        padding-left: $i * $main-layout-size-unit !important;
+        padding-right: $i * $main-layout-size-unit !important;
+    }
+    .padding-vertical-#{$i}x {
+        padding-top: $i * $main-layout-size-unit !important;
+        padding-bottom: $i * $main-layout-size-unit !important;
+    }
+    .padding-vertical-#{$i}x {
+        padding-top: $i * $main-layout-size-unit !important;
+        padding-bottom: $i * $main-layout-size-unit !important;
+    }
+};
+
+@each $side in $sides {
+    @each $size-key, $size-value in $additional-sizes {
+        .padding-#{$side}-#{$size-key} {
+            padding-#{$side}: $size-value;
+
+            &-important {
+                padding-#{$side}: $size-value !important;
+            }
+        }
+    };
+    .padding-#{$side} {
+        padding-#{$side}: $main-layout-size-unit;
+        &-important {
+            padding-#{$side}: $main-layout-size-unit !important;
+        }
+    };
+
+    // negative
+    .padding-#{$side}-negative {
+        padding-#{$side}: - $main-layout-size-unit !important;
+    };
+    .padding-#{$side}-negative-small {
+        padding-#{$side}: - $main-layout-size-unit/2 !important;
+    };
+};
+
+.padding {
+    padding: $cx-default-box-padding;
+    &-important {
+        padding: $cx-default-box-padding !important;
+    };
+
+    &-none {
+        padding: 0;
+        &-important {
+            padding: 0 !important;
+        }
+    }
+};
+
+// @Ognjen remove !important here and add classes with -important sufix
+.padding-vertical {
+    padding-top: $cx-default-box-padding !important;
+    padding-bottom: $cx-default-box-padding !important;
+    &-none {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+};
+.padding-horizontal {
+    padding-left: $cx-default-box-padding !important;
+    padding-right: $cx-default-box-padding !important;
+    &-none {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+}
+
+// STATE COLORS
+.negative-value, .error, .cxm-error, .cxm-negative-value {
+    color: $error-color;
+    &-important {
+        color: $error-color !important;
+    }
+};
+:is(.negative-value-light, .cxm-negative-value-light):not(:is(.cxb-button, .cxb-textfield, .cxb-lookupfield, .cxb-label)) {
+    color: $error-color-light;
+    &-important {
+        color: $error-color-light !important;
+    }
+};
+.positive-value, .success, .cxm-success, .cxm-positive-value {
+    color: $eds-success-color;
+    &-important {
+        color: $eds-success-color !important;
+    }
+};
+:is(.positive-value-light, .success-light, .cxm-success-light, .cxm-positive-value-light):not(:is(.cxb-button, .cxb-textfield, .cxb-lookupfield, .cxb-label)) {
+    color: $success-color-light;
+    &-important {
+        color: $success-color-light !important;
+    }
+};
+:is(.warning, .cxm-warning):not(:is(.cxb-button, .cxb-textfield, .cxb-lookupfield, .cxb-label)) { color: $eds-warning-color !important };
+.cxm-warning.cxm-warning.cxm-warning.cxm-link {
+    &:hover {
+        color: $eds-primary-color
+    }
+};
+.info, .cxm-info { color: $eds-info-color };
+.emphasize { background-color: $eds-swatchesoffwhite };
+
+.secondary {
+    color: $eds-text-color-secondary;
+
+    &.small {
+        font-size: $font-size-small;
+    }
+
+    &-light {
+        color: $eds-text-color-secondary-light;
+    }
+};
+
+// disabled
+.disabled, .cxm-disabled { color: $eds-text-color-disabled !important; pointer-events: none !important };
+.disabled-text, .cxm-disabled-text {
+    color: $eds-text-color-disabled;
+};
+.disabled-text-important, .cxm-disabled-text-important {
+    color: $eds-text-color-disabled !important;
+}
+
+// files specific colors
+.file-pdf, .cxm-file-pdf {
+    color: $eds-file-pdf-color;
+};
+.file-excel, .cxm-file-excel {
+    color: $eds-file-excel-color;
+};
+
+// FILTERS
+%blur { filter: blur(3px) grayscale(30%) };
+.mask {
+    filter: opacity(0.4) blur(2px);
+    pointer-events: none;
+};
+
+// OPACITY
+.opaque, .cxm-opaque {
+    color: $text-color-light;
+    &-important {
+        color: $text-color-light !important;
+    }
+};
+
+$opaque-state-map: (
+    2: $text-color-light-2x,
+    3: $text-color-light-3x,
+    4: $text-color-light-4x
+);
+@mixin opaqueStates($text-color: $text-color-light, $opacity-level: 2) {
+    .opaque-#{$opacity-level}, .cxm-opaque-#{$opacity-level}x {
+        color: $text-color;
+        &-important {
+            color: $text-color !important;
+        }
+    }
+};
+@each $opacity-level, $opacity-color in $opaque-state-map {
+    @include opaqueStates($text-color: $opacity-color, $opacity-level: $opacity-level);
+};
+
+// OVERFLOWS
+.overflow-auto { overflow: auto };
+.overflow-visible { overflow: visible };
+.overflow-visible-important { overflow: visible !important };
+.overflow-hidden { overflow: hidden };
+.overflowx-hidden { overflow-x: hidden !important };
+.overflowx-auto { overflow-x: auto !important };
+.overflowy-hidden { overflow-y: hidden !important };
+.overflowy-visible { overflow-y: visible !important };
+.overflowy-auto { overflow-y: auto  !important };
+.overflow-unset { overflow: unset };
+
+
+// DISPLAY
+.inline-block { display: inline-block !important; };
+.block { display: block !important };
+.display-none { display: none !important; }
+
+// VISIBILITY
+.hidden { visibility: hidden };
+
+// TEXT
+%text-large { font-size: $font-size-large-3x };
+%text-small { font-size: $font-size-small !important };
+
+// text size
+.text-large, .cxm-text-large, .font-large, .cxm-font-large { @extend %text-large };
+.text-larger, .cxm-text-larger, .font-larger, .cxm-font-larger {
+    font-size: $font-size-large-3x + 2;
+};
+.text-small, .cxm-text-small, .font-small, .cxm-font-small { @extend %text-small };
+
+.font-size-medium {
+    font-size: $font-medium
+}
+.font-size-default {
+    font-size: $cx-default-font-size;
+    &-important {
+        font-size: $cx-default-font-size !important;
+    }
+}
+
+// text decoration
+.line-through {
+    text-decoration-line: line-through;
+};
+.text-uppercase { text-transform: uppercase };
+
+// text alignment
+.text-right { text-align: right };
+.text-center { text-align: center !important };
+.text-left { text-align: left !important };
+.text-right-important { text-align: right !important };
+.vertical-align-middle { vertical-align: middle !important }
+.vertical-align-top { vertical-align: top };
+.vertical-align-bottom { vertical-align: bottom };
+
+// text color
+.text-white {
+    color: $eds-evooq-white !important;
+};
+
+.eds-text-color {
+    color: $eds-text-color;
+};
+
+// text line height
+@for $i from 12 through 34 {
+    .line-height-#{$i} {
+        line-height: #{$i}px;
+    }
+}
+
+// text rotation
+.rotate-90 {
+    transform: rotate(90deg);
+};
+
+// text weight
+.heading {
+    color: $eds-heading-color;
+}
+.font-bold {
+    font-weight: $font-weight-bolder !important;
+    .fal { font-weight: $font-weight-bolder }
+
+    &-viewmode {
+        .cxs-view-mode {
+            font-weight: $font-weight-bolder !important;
+        }
+    }
+};
+.font-semibold {
+    font-weight: $font-weight-bold !important;
+    .fal { font-weight: $font-weight-bold }
+};
+
+.font-dark {
+    color: $eds-evooq-dark-grey;
+    .fal { font-weight: $eds-evooq-dark-grey }
+};
+
+.font-normal {
+    font-size: $cx-default-font-size !important;
+    font-weight: $font-weight !important;
+};
+
+.font-large {
+    font-size: $font-size-header !important;
+};
+
+.font-medium {
+    font-size: 2 + $cx-default-font-size;
+};
+
+.text-light, .cxm-text-light {
+    // color: $eds-grey-40; // this is too light - unusable
+    color: $text-color-light-2x;
+    font-weight: $font-weight-thin;
+
+    .cxb-heading {
+        color: $text-color-light !important;
+        font-weight: $font-weight-thin;
+    }
+};
+// style
+.italic {
+    font-style: italic;
+}
+
+// POSITIONING
+.pos-relative {
+    position: relative;
+};
+
+.pos-absolute {
+    position: absolute;
+};
+
+%posSticky {
+    top: 0;
+    position: sticky;
+    z-index: 10;
+};
+
+.pos-sticky {
+    @extend %posSticky;
+};
+
+.content-cover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $loading-overlay-background-color;
+    z-index: 1;
+};
+
+// BG COLORS
+.bg {
+    &-white {
+        background-color: #fff;
+    };
+    &-terciary-light {
+        background-color: rgba($eds-swatchespurple, 0.1);
+    };
+    &-primary-light {
+        background-color: rgba($eds-primary-color, 0.1)
+    };
+
+    &-neutral {
+        background-color: $eds-body-background-color;
+    };
+};
+
+// BOX SHADOW
+.box-shadow-none {
+    box-shadow: none !important;
+};
+
+// SCREEN SIZES
+$breakpoints: (
+    large: 1940px,
+    medium: 1860px,
+    small: 1680px
+);
+
+@mixin breakpoint-down($point) {
+    @media screen and (max-width: map-get($breakpoints, $point) - 0.02px) {
+        @content;
+    }
+}
+
+.overflow-visible-screen-small {
+    @include breakpoint-down(small) {
+        overflow: visible;
+    }
+}
+
+// POINTER EVENTS
+.pointer-none {
+    pointer-events: none;
+};
+
+// HOVER
+@mixin hoverConstants($color, $background-color, $important: 'false') {
+    cursor: pointer;
+    color: $color;
+    background-color: $background-color;
+    @if $important == 'true' {
+        color: $color !important;
+        background-color: $background-color !important;
+    };
+
+    path {
+        fill: $color;
+        @if $important == 'true' {
+            fill: $color !important;
+        }
+    };
+};
+
+@mixin hoverStates($mod, $color: unset, $background-color: initial) {
+    .hover-#{$mod}, .cxm-hover-#{$mod} {
+        &:hover {
+           @include hoverConstants($color: $color, $background-color: $background-color);
+        };
+        &-important {
+            &:hover {
+                @include hoverConstants($color: $color, $background-color: $background-color, $important: 'true');
+            };
+        }
+    };
+};
+
+:is(div, span, i, a, li, button) {
+    @include hoverStates($mod: 'primary', $color: $primary-color);
+    @include hoverStates($mod: 'color-default', $color: $cx-default-color);
+    @include hoverStates($mod: 'transparent', $background-color: transparent);
+    @include hoverStates($mod: 'primary-bg', $background-color: $eds-primary-color-opaque-3);
+
+    // Cursor
+    $cursors: default, pointer;
+    @each $cursor in $cursors {
+        .cursor-#{$cursor} {
+            cursor: $cursor;
+        }
+
+        &.hover-cursor-#{$cursor} {
+            &:hover {
+                cursor: $cursor;
+            }
+        }
+    }
+};
+
+// DROPDOWNS
+.dropdown-pad {
+    .cxb-dropdown, .cxb-list.cxm-dropdown {
+        padding: $cx-default-box-padding;
+    }
+}
+
+// RESIZE
+@each $dir in $directions {
+    .resize {
+        &-#{$dir} {
+            resize: $dir;
+
+            // for some reason, inputClass doesn't work for TextArea
+            .cxe-textarea-input {
+                resize: $dir;
+            }
+        }
+    }
+}
+
+
+// DRAG AND DROP
+.dropfilearea {
+    min-height: 50px;
+    background-color: $eds-bg-color-light;
+    display: flex;
+    gap: 3 * $main-layout-size-unit;
+    border: 1px dashed $eds-border-color-base;
+    overflow: hidden;
+
+    &-active {
+        background-color: $eds-bg-color-base-4;
+    }
+}
+
+
+// CUSTOM
+// fixed position of save button
+%fixed-footer-buttons {
+    // I needed to add this because of Roland's demand about standalone tab shadow going over tab content
+    position: fixed;
+    bottom: 4.5 * $main-layout-size-unit;
+    right: 4.5 * $main-layout-size-unit;
+};
+
+.fixedfooter_buttons {
+    @extend %fixed-footer-buttons
+};
+
+// separators
+.separator-vertical {
+    width: 1px;
+    background-color: $cx-default-border-color;
+    margin: 0 $main-layout-size-unit;
+    min-height: $cx-default-box-line-height;
+};
+
+// legend
+.legend_square {
+    height: $cx-default-icon-size - 2px;
+    width: $cx-default-icon-size - 2px;
+    border-radius: $cx-default-border-radius - 2px;
+    background-color: $eds-body-background-color;
+
+    &.cxm-partner {
+        background-color: $partner-color;
+    };
+    &.cxm-mandate {
+        background-color: $mandate-color;
+    };
+    &.cxm-info {
+        background-color: $eds-info-color-opaque-5;
+        border: 1px solid $eds-border-color-base;
+    };
+    &.cxm-error {
+        background-color: $eds-tangerine;
+    };
+    &.cxm-warning {
+        background-color: $eds-warning-color;
+    };
+    &.cxm-success {
+        background-color: $eds-success-color;
+    };
+    &.cxm-small {
+        height: $main-layout-size-unit;
+        width: $main-layout-size-unit;
+    }
+    &.cxm-primary {
+        background-color: $primary-color;
+        border: 1px solid $eds-border-color-base;
+    };
+    &.cxm-simulation {
+        background-color: $simulation-color-dark;
+        border: 1px solid $eds-border-color-base;
+    };
+};
+
+.legend_vertical {
+    width: 5px;
+    height: 100%;
+    background-color: $eds-background-color-light;
+    border-radius: $border-radius-small;
+
+    &.cxm-error {
+        background-color: $eds-tangerine;
+    };
+    &.cxm-success {
+        background-color: $eds-success-color;
+    };
+    &.cxm-warning {
+        background-color: $eds-warning-color;
+    }
+}
+
+// containers
+.error_container {
+    padding: $cx-default-box-padding $cx-default-box-padding-large;
+    border: 1px solid $eds-evooq-pink;
+    border-radius: $border-radius;
+    background-color: $eds-evooq-pink-light;
+}
+
+.hidden_container {
+    position: relative;
+    top: -100%;
+    z-index: 100;
+    height: 100%;
+    transition: all 300ms cubic-bezier(0.4, 0.0, 1, 1);
+
+    // slide in from right
+    &.cxm-right {
+        left: calc(100% + #{2 * $main-layout-size-unit});
+        &.move-left {
+            left: 0;
+            top: -100%;
+            transition: all 400ms cubic-bezier(0.0, 0.0, 0.2, 1)
+        };
+    }
+    // slide in from left
+    &.cxm-left {
+        right: calc(100% + #{2 * $main-layout-size-unit});
+        &.move-right {
+            left: 0;
+            top: -100%;
+            transition: all 400ms cubic-bezier(0.0, 0.0, 0.2, 1)
+        }
+    };
+};
+
+// skeleton loading
+.skeleton-loading, .cxm-skeleton-loading {
+    position: relative;
+
+    &:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        background-image: linear-gradient(
+            90deg,
+            rgba(#fff, 0) 0,
+            rgba(#fff, 0.2) 20%,
+            rgba(#fff, 0.5) 60%,
+            rgba(#fff, 0)
+        );
+        animation: shimmer 1s infinite;
+        content: '';
+    };
+
+    &.cxm-dark, &-dark {
+        background-image: linear-gradient(
+            90deg,
+            rgba(#eee, 0.2) 0,
+            rgba(#eee, 0.5) 20%,
+            rgba(#eee, 0.8) 60%,
+            rgba(#eee, 0)
+        );
+    }
+
+    @keyframes shimmer {
+        100% {
+            transform: translateX(100%);
+        }
+    }
+}
+// drag and drop
+.dropfilearea {
+    min-height: 200px;
+    background-color: $eds-bg-color-light;
+    display: flex;
+    gap: 3 * $main-layout-size-unit;
+    border: 1px dashed $eds-border-color-base;
+    overflow: hidden;
+
+    &-active {
+        background-color: $eds-bg-color-base-4;
+    }
+}
+
+
+@keyframes highlight-flash {
+    0% {
+        background-color: initial;
+    }
+    50% {
+        background-color: $accent-color-light;
+    }
+    100% {
+        background-color: initial;
+    }
+}
+// background colors
+.bg-gray {
+    background-color: $background-color-dark-2x;
+}
