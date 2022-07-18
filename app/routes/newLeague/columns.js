@@ -20,35 +20,38 @@ export const getColumns = (showDynamicInfo) => {
          ),
          visible: showDynamicInfo,
       },
-      ...c('player_name', {
+      ...c('playerName', {
+         header: 'Player name',
          items: (
             <cx>
                <TextField
-                  value-bind="$record.player_name"
+                  value-bind="$record.playerName"
                   style="width: 200px"
                   // disabled={computable('gridData', (data) => data && data.some((r) => r.$editing && !r.$editing.add))}
                />
             </cx>
          ),
       }),
-      ...c('club', {
+      ...c('clubName', {
+         header: 'Club name',
          items: (
             <cx>
                <TextField
-                  value-bind="$record.club_name"
+                  value-bind="$record.clubName"
                   style="width: 200px"
                   // disabled={computable('gridData', (data) => data && data.some((r) => r.$editing && !r.$editing.add))}
                />
             </cx>
          ),
       }),
-      ...c('picture_url', {
+      ...c('emblemPictureURL', {
+         header: 'Club emblem',
          items: (
             <cx>
                <TextField
                   style="width:200px"
                   placeholder="give me picture url form the internet"
-                  text-bind="$record.picture_url"
+                  value-bind="$record.emblemPictureURL"
                />
             </cx>
          ),
@@ -57,12 +60,11 @@ export const getColumns = (showDynamicInfo) => {
    };
 
    for (let key in config) {
-      let { width, ...rest } = config[key];
-
+      let { width, header, ...rest } = config[key];
       config[key] = {
          field: key,
          header: {
-            text: /*  t(key) *|*/ key, ///
+            text: header,
          },
          sortable: true,
          style: {

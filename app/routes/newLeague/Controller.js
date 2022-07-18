@@ -2,6 +2,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { supabase } from '../../supabaseClient';
 import { leagueTemplate } from '../../util/newLeagueTemplate';
+import { setupGroupStage } from '../../util/tournament/tournamentDraw';
 
 export default {
    onInit() {
@@ -9,9 +10,24 @@ export default {
       console.log(leagueTemplate);
       this.store.set('gridData', [
          {
-            player_name: '',
-            club_name: '',
-            picture_url: '',
+            playerName: 'Milutin',
+            clubName: 'Novi grad',
+            emblemPictureURL: 'slika',
+         },
+         {
+            playerName: 'Milivoje',
+            clubName: 'Novi Sad',
+            emblemPictureURL: 'slicica',
+         },
+         {
+            playerName: 'Jevrosim',
+            clubName: 'Kolubara',
+            emblemPictureURL: 'ikona',
+         },
+         {
+            playerName: 'Sanchez',
+            clubName: 'Monterey',
+            emblemPictureURL: 'painto',
          },
       ]);
    },
@@ -29,14 +45,17 @@ export default {
       /* let { data: Liga, error: getError } = await supabase.from('Liga').select('*');
       debugger;
       return; */
-      let { player_name, club_name, picture_url } = this.store.get('gridData')[0];
+      let playersData = this.store.get('gridData');
+      let groupStage = setupGroupStage(playersData);
+      this.store.set('groupStage', groupStage);
 
-      const { data, error } = await supabase.from('Liga').insert([
-         { ime_kluba: club_name, ime_igraca: player_name },
+      /*  const { data, error } = await supabase.from('Codaxy Tournament').insert([
+         { 'Group stage': groupStageTest },
          //{ ime_kluba: 'Omladinac', ime_igraca: 'Boban' },
       ]);
-      console.log(data, error);
+      console.log(data, error); */
    },
+
    expandRow(e, { store }) {
       store.toggle('$record.expandRow', true);
    },
