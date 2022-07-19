@@ -29,6 +29,51 @@ export default {
             clubName: 'Monterey',
             emblemPictureURL: 'painto',
          },
+         {
+            playerName: 'Milutin',
+            clubName: 'Novi grad',
+            emblemPictureURL: 'slika',
+         },
+         {
+            playerName: 'Milivoje',
+            clubName: 'Novi Sad',
+            emblemPictureURL: 'slicica',
+         },
+         {
+            playerName: 'Jevrosim',
+            clubName: 'Kolubara',
+            emblemPictureURL: 'ikona',
+         },
+         {
+            playerName: 'Sanchez',
+            clubName: 'Monterey',
+            emblemPictureURL: 'painto',
+         },
+         {
+            playerName: 'Milutin',
+            clubName: 'Novi grad',
+            emblemPictureURL: 'slika',
+         },
+         {
+            playerName: 'Milivoje',
+            clubName: 'Novi Sad',
+            emblemPictureURL: 'slicica',
+         },
+         {
+            playerName: 'Jevrosim',
+            clubName: 'Kolubara',
+            emblemPictureURL: 'ikona',
+         },
+         {
+            playerName: 'Sanchez',
+            clubName: 'Monterey',
+            emblemPictureURL: 'painto',
+         },
+         {
+            playerName: 'Hugo',
+            clubName: 'Treasure Hunters',
+            emblemPictureURL: 'chest',
+         },
       ]);
    },
 
