@@ -2,18 +2,19 @@ import { isUndefined } from 'cx/util';
 
 export function setupGroupStage(playersData) {
    let numberOfTeams = playersData.length;
-   let spillover = numberOfTeams % 4;
+   let remainder = numberOfTeams % 4;
    let groupStage = {};
    let players = playersData;
 
-   return setupAlgorithm(spillover, numberOfTeams);
+   return setupAlgorithm(numberOfTeams);
 
-   function setupAlgorithm(spillover, numOfTeams) {
-      if (spillover == 0) {
+   function setupAlgorithm(numOfTeams) {
+      if (remainder == 0) {
          switch (numOfTeams) {
             case 4:
             case 8:
             case 28:
+            case 32:
                createGroups(0, 4);
                return groupStage;
             default:
@@ -22,112 +23,70 @@ export function setupGroupStage(playersData) {
          }
       }
 
+      if (numOfTeams % 5 == 0) createGroups(0, 5);
+
       switch (numOfTeams) {
-         case 5:
-            groupStage['A'] = addPlayersToGroup(0, 5);
-            break;
+         case 6:
          case 9:
-            groupStage['A'] = addPlayersToGroup(0, 5);
-            groupStage['B'] = addPlayersToGroup(5, 4);
+            createGroups(0, 3);
             break;
+
+         case 7:
+         case 11:
+            groupStage['A'] = addPlayersToGroup(0, 3);
+            createGroups(3, 4);
+            break;
+
          case 13:
             groupStage['A'] = addPlayersToGroup(0, 4);
             createGroups(4, 3);
             break;
+
+         case 14:
+         case 19:
+            groupStage['A'] = addPlayersToGroup(0, 4);
+            createGroups(4, 5);
+            break;
+
          case 17:
             groupStage['A'] = addPlayersToGroup(0, 5);
             createGroups(5, 4);
             break;
+
+         case 18:
+            createGroups(0, 6);
+            break;
+
          case 21:
+         case 26:
+         case 31:
             groupStage['A'] = addPlayersToGroup(0, 6);
             createGroups(6, 5);
             break;
-         case 25:
-            createGroups(0, 5);
+
+         case 22:
+            groupStage['A'] = addPlayersToGroup(0, 5);
+            groupStage['B'] = addPlayersToGroup(5, 5);
+            createGroups(10, 6);
             break;
+
+         case 23:
          case 29:
             groupStage['A'] = addPlayersToGroup(0, 5);
             createGroups(5, 6);
             break;
 
-         //spillover 2
-         case 6:
-         case 10:
-            createGroups(0, numOfTeams / 2);
-            break;
-         case 14:
-            groupStage['A'] = addPlayersToGroup(0, 4);
-            createGroups(4, 5);
-            break;
-         case 18:
-            groupStage['A'] = addPlayersToGroup(0, 5);
-            createGroups(0, 3);
-            break;
-         case 14:
-            groupStage['A'] = addPlayersToGroup(0, 5);
-            createGroups(0, 3);
+         case 27:
+            groupStage['A'] = addPlayersToGroup(0, 6);
+            groupStage['B'] = addPlayersToGroup(6, 6);
+            createGroups(12, 5);
             break;
       }
-      /* if (spillover == 0) {
-         switch (numberOfTeams) {
-            case 4:
-            case 8:
-            case 28:
-               createGroups(0, 4);
-               break;
-            default:
-               createGroups(0, numberOfTeams / 4);
-               break;
-         }
-      }
-
-      if (spillover == 1) {
-         switch (numberOfTeams) {
-            case 5:
-               groupStage['A'] = addPlayersToGroup(0, 5);
-               break;
-            case 9:
-               groupStage['A'] = addPlayersToGroup(0, 5);
-               groupStage['B'] = addPlayersToGroup(5, 4);
-               break;
-            case 13:
-               groupStage['A'] = addPlayersToGroup(0, 4);
-               createGroups(4, 3);
-               break;
-            case 17:
-               groupStage['A'] = addPlayersToGroup(0, 5);
-               createGroups(5, 4);
-               break;
-            case 21:
-               groupStage['A'] = addPlayersToGroup(0, 6);
-               createGroups(6, 5);
-               break;
-            case 25:
-               createGroups(0, 5);
-               break;
-            case 29:
-               groupStage['A'] = addPlayersToGroup(0, 5);
-               createGroups(5, 6);
-               break;
-         }
-      }
-
-      if (spillover == 2) {
-         groupStage['A'] = addPlayersToGroup(0, 3);
-         groupStage['B'] = addPlayersToGroup(3, 3);
-      }
-
-      if (spillover == 3) {
-         groupStage['A'] = addPlayersToGroup(0, 4);
-         groupStage['B'] = addPlayersToGroup(4, 3);
-      }
-
-      return groupStage; */
+      return groupStage;
    }
 
    function createGroups(startingIndex, numOfPlayers) {
       const groups = 'ABCDEFGH';
-      debugger;
       for (let group of groups) {
          if (!isUndefined(groupStage[group])) continue;
          if (startingIndex >= numberOfTeams) break;

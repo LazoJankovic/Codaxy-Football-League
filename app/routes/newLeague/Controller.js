@@ -9,22 +9,7 @@ export default {
       //this.store.set('league', []);
       console.log(leagueTemplate);
       this.store.set('gridData', [
-         {
-            playerName: 'Milutin',
-            clubName: 'Novi grad',
-            emblemPictureURL: 'slika',
-         },
-         {
-            playerName: 'Milivoje',
-            clubName: 'Novi Sad',
-            emblemPictureURL: 'slicica',
-         },
-         {
-            playerName: 'Jevrosim',
-            clubName: 'Kolubara',
-            emblemPictureURL: 'ikona',
-         },
-         {
+         /* {
             playerName: 'Sanchez',
             clubName: 'Monterey',
             emblemPictureURL: 'painto',
@@ -45,32 +30,143 @@ export default {
             emblemPictureURL: 'ikona',
          },
          {
-            playerName: 'Sanchez',
+            playerName: 'Pero',
             clubName: 'Monterey',
             emblemPictureURL: 'painto',
          },
          {
-            playerName: 'Milutin',
+            playerName: 'Djuro',
             clubName: 'Novi grad',
             emblemPictureURL: 'slika',
          },
          {
-            playerName: 'Milivoje',
+            playerName: 'Marko',
             clubName: 'Novi Sad',
             emblemPictureURL: 'slicica',
          },
          {
-            playerName: 'Jevrosim',
+            playerName: 'Sasa',
             clubName: 'Kolubara',
             emblemPictureURL: 'ikona',
          },
          {
-            playerName: 'Sanchez',
+            playerName: 'Bobo',
             clubName: 'Monterey',
             emblemPictureURL: 'painto',
          },
          {
             playerName: 'Hugo',
+            clubName: 'Treasure Hunters',
+            emblemPictureURL: 'chest',
+         },
+         {
+            playerName: 'Nebojsa',
+            clubName: 'Monterey',
+            emblemPictureURL: 'painto',
+         },
+         {
+            playerName: 'Vedran',
+            clubName: 'Novi grad',
+            emblemPictureURL: 'slika',
+         },
+         {
+            playerName: 'Ogi Jr.',
+            clubName: 'Novi Sad',
+            emblemPictureURL: 'slicica',
+         },
+         {
+            playerName: 'Ogi Sr.',
+            clubName: 'Kolubara',
+            emblemPictureURL: 'ikona',
+         },
+         {
+            playerName: 'Njegos',
+            clubName: 'Monterey',
+            emblemPictureURL: 'painto',
+         },
+         {
+            playerName: 'Danijela',
+            clubName: 'Novi grad',
+            emblemPictureURL: 'slika',
+         },
+         {
+            playerName: 'Stefan',
+            clubName: 'Novi Sad',
+            emblemPictureURL: 'slicica',
+         },
+         {
+            playerName: 'Stijak',
+            clubName: 'Kolubara',
+            emblemPictureURL: 'ikona',
+         },
+         {
+            playerName: 'Zrna',
+            clubName: 'Monterey',
+            emblemPictureURL: 'painto',
+         },
+         {
+            playerName: 'Bodo',
+            clubName: 'Treasure Hunters',
+            emblemPictureURL: 'chest',
+         }, 
+         {
+            playerName: 'Simic',
+            clubName: 'Monterey',
+            emblemPictureURL: 'painto',
+         },
+         {
+            playerName: 'Goran',
+            clubName: 'Novi grad',
+            emblemPictureURL: 'slika',
+         },
+         {
+            playerName: 'Jovica',
+            clubName: 'Novi Sad',
+            emblemPictureURL: 'slicica',
+         }, */
+         {
+            playerName: 'Timi',
+            clubName: 'Kolubara',
+            emblemPictureURL: 'ikona',
+         },
+         {
+            playerName: 'Sladakovic',
+            clubName: 'Monterey',
+            emblemPictureURL: 'painto',
+         },
+         {
+            playerName: 'Djuka',
+            clubName: 'Novi grad',
+            emblemPictureURL: 'slika',
+         },
+         {
+            playerName: 'Milic',
+            clubName: 'Novi Sad',
+            emblemPictureURL: 'slicica',
+         },
+         {
+            playerName: 'Malina',
+            clubName: 'Kolubara',
+            emblemPictureURL: 'ikona',
+         },
+         {
+            playerName: 'Bobo',
+            clubName: 'Monterey',
+            emblemPictureURL: 'painto',
+         },
+
+         {
+            playerName: 'Pamela',
+            clubName: 'Treasure Hunters',
+            emblemPictureURL: 'chest',
+         },
+         {
+            playerName: 'Jessica',
+            clubName: 'Treasure Hunters',
+            emblemPictureURL: 'chest',
+         },
+         {
+            playerName: 'Ava',
             clubName: 'Treasure Hunters',
             emblemPictureURL: 'chest',
          },
@@ -93,7 +189,17 @@ export default {
       let playersData = this.store.get('gridData');
       let groupStage = setupGroupStage(playersData);
       this.store.set('groupStage', groupStage);
-
+      console.log(groupStage);
+      let players = 0;
+      for (let key in groupStage) {
+         let ingroups = 0;
+         for (let group in groupStage[key]) {
+            players++;
+            ingroups++;
+         }
+         console.log(ingroups);
+      }
+      console.log(players);
       /*  const { data, error } = await supabase.from('Codaxy Tournament').insert([
          { 'Group stage': groupStageTest },
          //{ ime_kluba: 'Omladinac', ime_igraca: 'Boban' },
