@@ -8,7 +8,7 @@ export default {
    onInit() {
       //this.store.set('league', []);
       console.log(leagueTemplate);
-      this.store.set('gridData', [
+      this.store.set('playersData', [
          /* {
             playerName: 'Sanchez',
             clubName: 'Monterey',
@@ -182,14 +182,15 @@ export default {
       console.log('apiTest');
    },
 
-   async postTest() {
+   async createTournament() {
       /* let { data: Liga, error: getError } = await supabase.from('Liga').select('*');
       debugger;
       return; */
-      let playersData = this.store.get('gridData');
+      let tournamentName = this.store.get('tournamentName');
+      let playersData = this.store.get('playersData');
       let groupStage = setupGroupStage(playersData);
       this.store.set('groupStage', groupStage);
-      console.log(groupStage);
+      /* console.log(groupStage);
       let players = 0;
       for (let key in groupStage) {
          let ingroups = 0;
@@ -199,23 +200,32 @@ export default {
          }
          console.log(ingroups);
       }
-      console.log(players);
-      /*  const { data, error } = await supabase.from('Codaxy Tournament').insert([
-         { 'Group stage': groupStageTest },
-         //{ ime_kluba: 'Omladinac', ime_igraca: 'Boban' },
-      ]);
-      console.log(data, error); */
+      console.log(players); */
+
+      const { data, error } = await supabase
+         .from('Codaxy Tournament')
+         .insert([{ 'Group stage': groupStage, 'Tournament name': tournamentName }]);
+      console.log(data, error);
    },
 
    expandRow(e, { store }) {
       store.toggle('$record.expandRow', true);
    },
    addRow() {
-      this.store.update('gridData', (records) => [
+      this.store.update('playersData', (records) => [
          {
-            $editing: { add: true },
+            playerName: '',
+            clubName: '',
+            emblemPictureURL: '',
          },
          ...records,
       ]);
+
+      // this.store.mutate('playersData', (rec) => records.push());
+   },
+   removePlayer(e, istance) {
+      let { store, controller } = instance;
+      let data = store.get('$record');
+      controller[onDelete](data, instance);
    },
 };

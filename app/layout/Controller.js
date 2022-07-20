@@ -1,24 +1,11 @@
 import { History } from 'cx/ui';
 import { GET } from '../api/util/methods';
+import { supabase } from '../supabaseClient';
 
 export default {
    onInit() {
-      let seasons = [
-         {
-            name: 'Prva liga',
-            standings: {},
-            results: {},
-            players: { Mirko: {}, Zarko: {} },
-         },
-         {
-            name: 'Druga liga',
-            standings: {},
-            results: {},
-            players: { Mirko: {}, Zarko: {} },
-         },
-      ];
-
-      this.store.set('seasons', seasons);
+      let tournamentsInfo = this.getTournaments(); //await
+      this.store.set('tournamentsInfo', tournamentsInfo);
 
       this.addTrigger('scroll-reset', ['url'], () => {
          document.scrollingElement.scrollTop = 0;
@@ -51,5 +38,11 @@ export default {
       //window.location = "/sign-out";
       this.store.set('user', null);
       History.pushState({}, null, '~/');
+   },
+
+   async getTournaments() {
+      let { data, error } = await supabase.from('Codaxy Tournament').select('id,TournamentName');
+      console.log(error);
+      return data;
    },
 };

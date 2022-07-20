@@ -1,3 +1,4 @@
+import { enableImmerMutate } from 'cx-immer';
 import { Store } from 'cx/data';
 import { Url, History, Widget, startHotAppLoop, enableCultureSensitiveFormatting } from 'cx/ui';
 import { Timing, Debug } from 'cx/util';
@@ -5,6 +6,7 @@ import { Timing, Debug } from 'cx/util';
 import './data/mock-api-service-worker';
 
 enableCultureSensitiveFormatting();
+enableImmerMutate();
 
 //store
 const store = new Store({

@@ -1,5 +1,5 @@
 import { KeySelection } from 'cx/ui';
-import { Button, Rescope, TextField } from 'cx/widgets';
+import { Button, Grid, Rescope, TextField } from 'cx/widgets';
 import { RowEditableGrid } from '../../components/RowEditableGrid';
 import Controller from './Controller';
 import { getColumns } from './columns';
@@ -10,37 +10,38 @@ export default (
          <div controller={Controller}>
             Hello from Cx CLI!
             <Button text="get test" onClick="apiTest" />
-            <Button text="post test" onClick="postTest" />
+            <Button text="post test" onClick="createTournament" />
             <div class="m-auto">
                <TextField
                   class="m-auto"
                   baseClass="border-b-2"
                   placeholder="Enter name of your league"
-                  value-bind="leagueName"
+                  value-bind="tournamentName"
+                  required
                />
             </div>
             <div class="toolbar gap-2x">
-               <Button text="ui_add_fee" onClick="addRow" icon="fa-plus" mod="hollow" />
-               <Button
+               <Button text="Додај играча" onClick="addRow" icon="plus" mod="hollow" />
+               {/* <Button
                   text="ui_edit_details"
                   mod="hollow"
                   icon="fa-edit"
                   onClick="showRecordDetails"
-                  /*  disabled={computable('gridData', 'selection', (gridData, selection) => {
-                     if (!gridData || !selection) return true;
+                  //  disabled={computable('gridData', 'selection', (gridData, selection) => {
+                  //    if (!gridData || !selection) return true;
 
-                     let record = gridData.find((r) => r.id === selection);
-                     let feeModelEditable =
-                        record &&
-                        record.mnd_fee_structure_enabled_fee_model_parameters &&
-                        record.mnd_fee_structure_enabled_fee_model_parameters.length;
-                     return !isUserAdminOrHasPermission('MandateModify') || !feeModelEditable;
-                  })} */
-               />
+                  //    let record = gridData.find((r) => r.id === selection);
+                  //    let feeModelEditable =
+                  //       record &&
+                  //       record.mnd_fee_structure_enabled_fee_model_parameters &&
+                  //       record.mnd_fee_structure_enabled_fee_model_parameters.length;
+                  //    return !isUserAdminOrHasPermission('MandateModify') || !feeModelEditable;
+                   })} 
+               /> */}
                <Button
-                  text="ui_remove"
-                  onClick="removeFeeStructure"
-                  icon="fa-trash"
+                  text="Уклони играча"
+                  onClick="removePlayer"
+                  icon="trash"
                   mod="hollow"
                   confirm={{
                      message: 'ui_fin_mnd_fee_structures_delete_msg',
@@ -51,14 +52,16 @@ export default (
                />
                <Button icon="fa-sync" mod="hollow" class="place-right" onClick="loadData" tooltip="ui_refresh" />
             </div>
-            <RowEditableGrid
+            <Grid
                ///style={style}
+               clearableSort
                scrollable
-               records-bind="gridData"
+               records-bind="playersData"
                emptyText={/* errorMessage ||  */ 'general_empty_message'}
                selection={{
                   type: KeySelection,
                   bind: 'selection',
+                  multiple: true,
                }}
                mod={{
                   '': true, ///
@@ -66,7 +69,8 @@ export default (
                   condensed: true,
                }}
                columns={getColumns(true)} ///
-               row={{
+               multiple
+               /* row={{
                   mod: { expr: "!!{$record.$editing} ? 'edit-row' : null" },
                   line3: {
                      visible: { expr: '{$record.expandRow}' },
@@ -107,7 +111,7 @@ export default (
                         },
                      ],
                   },
-               }}
+               }} */
                onSave="updateRow"
                border={false}
                ///disableEditing={!isUserAdminOrHasPermission('MandateModify')}

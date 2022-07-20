@@ -3121,6 +3121,11 @@ csso@^4.2.0:
   dependencies:
     css-tree "^1.1.2"
 
+cx-immer@^22.3.0:
+  version "22.3.0"
+  resolved "https://registry.yarnpkg.com/cx-immer/-/cx-immer-22.3.0.tgz#a16ef03f0c17e05dbdaaf272468af3853072593b"
+  integrity sha512-yuTXwnnhyr/gOM9FyTq/Ub6oZc4LI5fjE4X+bvxFUEpDcb8sK0LpxnLmhHV3pZeEBa168jGyHXLZ5rQWeVopEA==
+
 cx-react@^17.10.0:
   version "17.10.0"
   resolved "https://registry.npmjs.org/cx-react/-/cx-react-17.10.0.tgz"
@@ -3131,10 +3136,10 @@ cx-scss-manifest-webpack-plugin@^18.6.0:
   resolved "https://registry.npmjs.org/cx-scss-manifest-webpack-plugin/-/cx-scss-manifest-webpack-plugin-18.6.0.tgz"
   integrity sha512-wR36z/0yqOebANyExB/9y3JHWWQ+8oco2qKI0d4n9m3ALjlw1+YRJcWu8OB2Xdpill/SNeff2aTQmU1kIowHJA==
 
-cx@^21.12.0:
-  version "21.12.0"
-  resolved "https://registry.npmjs.org/cx/-/cx-21.12.0.tgz"
-  integrity sha512-9cQOm4LjC0jgpxZ1AqRofd4D3LfuOw9fUM6fMWfX6UWLrf51+2ks1jO+HXTSe2NEhvVxVK98wR5RddnP0l6sBA==
+cx@^22.7.1:
+  version "22.7.1"
+  resolved "https://registry.yarnpkg.com/cx/-/cx-22.7.1.tgz#457e15d968ccb861a1466cece7d75a39d7d5982b"
+  integrity sha512-vczWGTD8UUWhdbazQU4N8aq6YRi8DZa4FZV777zK1a7DaKHA78MVK3H7jRKGfjF4nU/tqs77CX+T2uc/GXVG7A==
   dependencies:
     intl-io "^0.3.0"
     route-parser "^0.0.5"
@@ -4960,6 +4965,11 @@ ignore@^5.1.4:
   version "5.1.8"
   resolved "https://registry.npmjs.org/ignore/-/ignore-5.1.8.tgz"
   integrity sha512-BMpfD7PpiETpBl/A6S498BaIJ6Y/ABT93ETbby2fP00v4EbvPBXWEoaR1UBPKs3iR53pJY7EtZk5KACI57i1Uw==
+
+immer@^9.0.15:
+  version "9.0.15"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.15.tgz#0b9169e5b1d22137aba7d43f8a81a495dd1b62dc"
+  integrity sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==
 
 import-cwd@^3.0.0:
   version "3.0.0"

@@ -3,23 +3,6 @@ import { Button, DateField, LookupField, NumberField, TextField } from 'cx/widge
 
 export const getColumns = (showDynamicInfo) => {
    let config = {
-      row_expander: {
-         header: '',
-         field: 'row_expander',
-         align: 'center',
-         width: 40,
-         items: (
-            <cx>
-               <Button
-                  mod="hollow"
-                  class="row-expander"
-                  icon-expr="{$record.expandRow} ? 'fa-chevron-down' : 'fa-chevron-right'"
-                  onClick="expandRow"
-               />
-            </cx>
-         ),
-         visible: showDynamicInfo,
-      },
       ...c('playerName', {
          header: 'Player name',
          items: (
@@ -27,6 +10,7 @@ export const getColumns = (showDynamicInfo) => {
                <TextField
                   value-bind="$record.playerName"
                   style="width: 200px"
+                  required
                   // disabled={computable('gridData', (data) => data && data.some((r) => r.$editing && !r.$editing.add))}
                />
             </cx>
@@ -39,6 +23,7 @@ export const getColumns = (showDynamicInfo) => {
                <TextField
                   value-bind="$record.clubName"
                   style="width: 200px"
+                  required
                   // disabled={computable('gridData', (data) => data && data.some((r) => r.$editing && !r.$editing.add))}
                />
             </cx>
@@ -57,6 +42,23 @@ export const getColumns = (showDynamicInfo) => {
          ),
          align: 'right',
       }),
+      /* row_expander: {
+         header: '',
+         field: 'row_expander',
+         align: 'center',
+         width: 40,
+         items: (
+            <cx>
+               <Button
+                  mod="hollow"
+                  class="row-expander"
+                  icon-expr="{$record.expandRow} ? 'fa-chevron-down' : 'fa-chevron-right'"
+                  onClick="expandRow"
+               />
+            </cx>
+         ),
+         visible: showDynamicInfo,
+      }, */
    };
 
    for (let key in config) {
