@@ -38,19 +38,15 @@ export function setupGroupStage(playersData) {
             break;
 
          case 13:
-            groupStage['A'] = addPlayersToGroup(0, 4);
-            createGroups(4, 3);
+         case 17:
+            groupStage['A'] = addPlayersToGroup(0, 5);
+            createGroups(5, 4);
             break;
 
          case 14:
          case 19:
             groupStage['A'] = addPlayersToGroup(0, 4);
             createGroups(4, 5);
-            break;
-
-         case 17:
-            groupStage['A'] = addPlayersToGroup(0, 5);
-            createGroups(5, 4);
             break;
 
          case 18:

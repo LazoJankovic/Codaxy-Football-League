@@ -191,25 +191,18 @@ export const CheckerLayout = ({ children, nav }) => (
          </div>
 
          <div class="border-r pt-3">
-            <div class="px-6 py-3 text-gray-400 text-sm">Leagues</div>
-            <Repeater records-bind="seasons">
+            <div class="px-6 py-3 text-gray-400 text-sm">Турнири</div>
+            <Repeater records-bind="tournamentsInfo" recordAlias="$tournament">
                <NavItem
-                  text-bind="$record.name"
+                  text-bind="$tournament.TournamentName"
                   icon="chart-bar"
-                  href={computable('$index', (index) => {
-                     return `~/season/${index + 1}`;
-                  })}
-               />
-
-               <p
-                  class="font-light text-center"
-                  text={computable('$index', (index) => {
-                     return 'Sezona ' + (index + 1);
+                  href={computable('$tournament.id', (id) => {
+                     return `~/tournament/?tournamentId=${id}`;
                   })}
                />
             </Repeater>
-
-            <NavItem text="Create new league" icon="adjustments" href="~/newleague" />
+            <div class="px-6 py-3 text-gray-400 text-sm" />
+            <NavItem text="Направи нови турнир" icon="adjustments" href="~/newleague" />
 
             <div class="px-6 py-3 text-gray-400 text-sm">Main Menu</div>
             <NavItem text="Dashboard" icon="chart-bar" href="~/dashboard" />

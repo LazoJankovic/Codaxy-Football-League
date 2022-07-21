@@ -9,7 +9,7 @@ import SignIn from './pages/sign-in';
 import { SandboxedRoute } from '../components/SandboxedRoute';
 import InvoiceRoutes from './invoices';
 import { PageNotImplemented } from '../components/PageNotImplemented';
-import League from './league';
+import Tournament from './tournament';
 import NewLeague from './newLeague';
 
 export default () => (
@@ -24,8 +24,8 @@ export default () => (
          <RedirectRoute route="~/" redirect="~/dashboard" url-bind="url" />
 
          <CheckerLayout>
-            <Route route="~/season" url-bind="url" prefix>
-               <League />
+            <Route route="~/tournament" url-bind="url" prefix>
+               <Tournament />
             </Route>
 
             <Route route="~/newleague" url-bind="url" prefix>

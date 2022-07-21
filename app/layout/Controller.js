@@ -1,11 +1,11 @@
 import { History } from 'cx/ui';
 import { GET } from '../api/util/methods';
 import { supabase } from '../supabaseClient';
+import { showErrorToast } from '../util/toasts';
 
 export default {
    onInit() {
-      let tournamentsInfo = this.getTournaments(); //await
-      this.store.set('tournamentsInfo', tournamentsInfo);
+      this.getTournaments();
 
       this.addTrigger('scroll-reset', ['url'], () => {
          document.scrollingElement.scrollTop = 0;
@@ -41,8 +41,13 @@ export default {
    },
 
    async getTournaments() {
-      let { data, error } = await supabase.from('Codaxy Tournament').select('id,TournamentName');
-      console.log(error);
-      return data;
+      try {
+         let { data, error } = await supabase.from('Codaxy Tournament').select('id,TournamentName');
+         if (error) throw error;
+         this.store.set('tournamentsInfo', data);
+      } catch (error) {
+         console.log(error);
+         showErrorToast(error.message);
+      }
    },
 };
