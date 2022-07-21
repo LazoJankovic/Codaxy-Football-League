@@ -1,0 +1,98 @@
+.cxb-loading-overlay-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  background: $loading-overlay-background-color;
+  z-index: 10;
+
+  &.#{$mod}dark {
+    background-color: $eds-main-bg-color;
+    color: rgba(#fff, 0.77);
+    .#{$element}loading-overlay-error {
+      color: $warning-color-dark;
+    }
+  }
+
+  &.cxm-inset {
+    padding: 5px 10px;
+  }
+
+  &.cxs-animated {
+    opacity: 0;
+    transition: opacity 400ms;
+    pointer-events: none;
+
+    &.on {
+      opacity: 1;
+      pointer-events: all;
+      transition: none;
+    }
+  }
+}
+
+.cxe-loading-overlay-indicator {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+
+    .cxb-icon {
+        font-size: 6 * $main-layout-size-unit;
+        animation: spin 1s linear infinite;
+        transform-origin: 3 * $main-layout-size-unit;
+        margin-right: 2 * $main-layout-size-unit;
+        color: $text-color-light-2x;
+        height: 6 * $main-layout-size-unit;
+        // width: fit-content;
+
+        &.cxm-small {
+            font-size: 3 * $main-layout-size-unit;
+            transform-origin: 1.5 * $main-layout-size-unit;
+            height: 3 * $main-layout-size-unit;
+        }
+    }
+
+};
+
+.cxe-loading-overlay-error {
+  color: $error-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  line-height: 1.6;
+
+  .error-buttons {
+    margin: 20px 0 0;
+  }
+}
+
+@keyframes fadein {
+  from {
+
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.loadingoverlay_wrapper {
+    position: relative;
+}
+
