@@ -2,7 +2,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { supabase } from '../../supabaseClient';
 import { leagueTemplate } from '../../util/newLeagueTemplate';
-import { setupGroupStage } from '../../util/tournament/tournamentDraw';
+import { createGroupsSchedule, createGroupStageSchedule, setupGroupStage } from '../../util/tournament/tournamentDraw';
 
 export default {
    onInit() {
@@ -79,6 +79,7 @@ export default {
             clubName: 'Kolubara',
             emblemPictureURL: 'ikona',
          },
+         */
          {
             playerName: 'Njegos',
             clubName: 'Monterey',
@@ -108,7 +109,7 @@ export default {
             playerName: 'Bodo',
             clubName: 'Treasure Hunters',
             emblemPictureURL: 'chest',
-         }, 
+         },
          {
             playerName: 'Simic',
             clubName: 'Monterey',
@@ -123,7 +124,7 @@ export default {
             playerName: 'Jovica',
             clubName: 'Novi Sad',
             emblemPictureURL: 'slicica',
-         }, */
+         },
          {
             playerName: 'Timi',
             clubName: 'Kolubara',
@@ -189,22 +190,13 @@ export default {
       let tournamentName = this.store.get('tournamentName');
       let playersData = this.store.get('playersData');
       let groupStage = setupGroupStage(playersData);
+      let groupStageMatches = createGroupStageSchedule(groupStage);
+
       this.store.set('groupStage', groupStage);
-      /* console.log(groupStage);
-      let players = 0;
-      for (let key in groupStage) {
-         let ingroups = 0;
-         for (let group in groupStage[key]) {
-            players++;
-            ingroups++;
-         }
-         console.log(ingroups);
-      }
-      console.log(players); */
 
       const { data, error } = await supabase
          .from('Codaxy Tournament')
-         .insert([{ 'Group stage': groupStage, 'Tournament name': tournamentName }]);
+         .insert([{ TournamentName: tournamentName, GroupStage: groupStage, GroupMatches: groupStageMatches }]);
       console.log(data, error);
    },
 

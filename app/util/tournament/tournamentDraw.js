@@ -1,4 +1,5 @@
 import { isUndefined } from 'cx/util';
+import robin from 'roundrobin';
 
 export function setupGroupStage(playersData) {
    let numberOfTeams = playersData.length;
@@ -105,6 +106,16 @@ export function setupGroupStage(playersData) {
    }
 }
 
+export function createGroupStageSchedule(groups) {
+   let groupMatches = { ...groups };
+   for (let group in groups) {
+      let groupPlayers = Object.keys(groups[group]);
+      const groupSize = groupPlayers.length;
+      groupMatches[group] = robin(groupSize, groupPlayers);
+   }
+   return groupMatches;
+}
+
 let playerDataTemplate = {
    club: '',
    emblemPictureURL: '',
@@ -114,3 +125,4 @@ let playerDataTemplate = {
    goalsScored: 0,
    goalsConceded: 0,
 };
+
