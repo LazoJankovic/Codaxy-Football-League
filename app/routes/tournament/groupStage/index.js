@@ -12,7 +12,9 @@ export default createFunctionalComponent(({ groups }) => {
             controller={Controller}
          >
             <div>
-               <Repeater records="groupsArray" recordAlias="$group">
+               <Repeater records={Object.keys(groups)} recordAlias="$groupLetter">
+                  
+                 
                   <Grid
                      class="grow"
                      records-bind="$group"
@@ -54,6 +56,7 @@ export default createFunctionalComponent(({ groups }) => {
                         },
                      ]}
                   />
+               
                </Repeater>
             </div>
          </Restate>

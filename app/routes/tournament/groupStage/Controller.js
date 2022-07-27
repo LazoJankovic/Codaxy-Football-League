@@ -2,10 +2,8 @@ import { convertToGroupsArray } from '../../../util/tournament/convertToGroupsAr
 
 export default {
    onInit() {
-      /* let groups = this.store.get('groups');
-      this.store.set('groupsArray', convertToGroupsArray(groups));
-
-      let a = this.store.get('groupsArray');
-      debugger; */
+      let groups = this.store.get('groups');
+      //this.store.set('groupsArray', convertToGroupsArray(groups));
+      //let groupLetters = Object.keys(groups);
    },
 };

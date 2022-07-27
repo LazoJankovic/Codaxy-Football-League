@@ -1,5 +1,1 @@
-export function convertToGroupsArray(groups) {
-   let a = Object.keys(groups).map((group) => groups[group]);
-   debugger;
-   return a;
-}
+export let convertToGroupsArray = (groups) =>  Object.keys(groups).map((group) => groups[group]);
