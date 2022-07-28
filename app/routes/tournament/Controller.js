@@ -14,6 +14,7 @@ export default () => {
             'tournamentChange',
             ['url'],
             (url) => {
+               if (!url) return;
                let { tournamentId } = getUrlParams(url);
                if (!tournamentId) return;
                this.loadTournament(tournamentId);

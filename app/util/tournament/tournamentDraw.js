@@ -96,10 +96,12 @@ export function setupGroupStage(playersData) {
       let groupPlayers = {};
 
       for (let i = startingIndex; i < startingIndex + numOfPlayers; i++) {
-         groupPlayers[players[i].playerName] = {
-            ...playerDataTemplate,
+         let playerName = players[i].playerName;
+         groupPlayers[playerName] = {
+            playerName,
             club: players[i].clubName,
             emblemPictureURL: players[i].emblemPictureURL,
+            ...playerDataTemplate,
          };
       }
       return groupPlayers;
@@ -117,12 +119,13 @@ export function createGroupStageSchedule(groups) {
 }
 
 let playerDataTemplate = {
-   club: '',
-   emblemPictureURL: '',
+   playedGames: 0,
    wins: 0,
    draws: 0,
    losses: 0,
    goalsScored: 0,
    goalsConceded: 0,
+   //goalDifference: 0,
+   points: 0,
 };
 

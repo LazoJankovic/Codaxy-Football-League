@@ -1,62 +1,45 @@
-import { computable, createFunctionalComponent, Repeater, Restate } from 'cx/ui';
-import { Grid } from 'cx/widgets';
+import { computable, createFunctionalComponent, PureContainer, Repeater, Restate } from 'cx/ui';
+import { Button, Grid } from 'cx/widgets';
+import { getGroupColumns } from './columns';
 import Controller from './Controller';
 
-export default createFunctionalComponent(({ groups }) => {
+export default createFunctionalComponent(({ groups, groupMatches }) => {
    return (
       <cx>
          <Restate
             data={{
                groups,
+               groupMatches,
             }}
             controller={Controller}
          >
-            <div>
-               <Repeater records={Object.keys(groups)} recordAlias="$groupLetter">
-                  
-                 
+            <div class="width-half flex-column gap-2x">
+               <Repeater records-bind="groupsArray" recordAlias="$group">
+                  <div>
+                     <Grid
+                        class="m-4 mb border-2 border-solid border-sky-500"
+                        records-expr="Object.values({$group})"
+                        columns={getGroupColumns()}
+                        /* columnParams={}*/
+                        //onGetColumns={getGroupColumns()}
+                        headerMode="plain"
+                        clearableSort
+                     />
+                     <Button class="mb-8" text="click me baby" onClik="showGroupMatches" />
+                  </div>
+               </Repeater>
+            </div>
+
+            <div class="flex-column gap-2x width-half">
+               <Repeater records-bind="selectedGroup" recordAlias="$group">
                   <Grid
-                     class="grow"
-                     records-bind="$group"
+                     records-expr="Object.values({$group})"
+                     columns={getGroupColumns()}
+                     /* columnParams={}*/
+                     //onGetColumns={getGroupColumns()}
                      headerMode="plain"
-                     columns={[
-                        {
-                           field: 'name',
-                           header: { text: 'Product', class: 'pl-0' },
-                           class: '!pl-0',
-                           sortable: true,
-                        },
-                        {
-                           field: 'sales',
-                           header: 'Sales',
-                           format: 'currency;EUR;0',
-                           align: 'right',
-                           sortable: true,
-                        },
-                        {
-                           field: 'percent',
-                           header: 'Percentage',
-                           format: 'p;1',
-                           align: 'right',
-                           sortable: true,
-                        },
-                        {
-                           field: 'percent',
-                           header: '',
-                           children: (
-                              <cx>
-                                 <div
-                                    class="bg-green-600 h-2"
-                                    style={{
-                                       width: computable('$record.percent', (percent) => percent * 400),
-                                    }}
-                                 />
-                              </cx>
-                           ),
-                        },
-                     ]}
+                     clearableSort
                   />
-               
                </Repeater>
             </div>
          </Restate>
