@@ -1,5 +1,6 @@
 import { isUndefined } from 'cx/util';
 import robin from 'roundrobin';
+import groupLetters from './groupLetters';
 
 export function setupGroupStage(playersData) {
    let numberOfTeams = playersData.length;
@@ -83,8 +84,7 @@ export function setupGroupStage(playersData) {
    }
 
    function createGroups(startingIndex, numOfPlayers) {
-      const groups = 'ABCDEFGH';
-      for (let group of groups) {
+      for (let group of groupLetters) {
          if (!isUndefined(groupStage[group])) continue;
          if (startingIndex >= numberOfTeams) break;
          groupStage[group] = addPlayersToGroup(startingIndex, numOfPlayers);
