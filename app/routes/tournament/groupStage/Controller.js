@@ -10,7 +10,5 @@ export default {
          },
          true
       );
-
-      //let groupLetters = Object.keys(groups);
    },
 };

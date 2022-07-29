@@ -1,8 +1,7 @@
-import { computable, createFunctionalComponent, PureContainer, Repeater, Restate } from 'cx/ui';
+import { createFunctionalComponent, expr, Repeater, Restate } from 'cx/ui';
 import { Button, Grid, NumberField } from 'cx/widgets';
 import { getGroupColumns } from './columns';
 import Controller from './Controller';
-import groupLetters from '../../../util/tournament/groupLetters';
 
 export default createFunctionalComponent(({ groups, groupMatches }) => {
    let groupLetters = 'ABCDEFGH';
@@ -38,18 +37,37 @@ export default createFunctionalComponent(({ groups, groupMatches }) => {
                </Repeater>
             </div>
 
-            <div class="flex-column gap-2x width-half">
-               <Repeater records-bind="selectedGroup" recordAlias="$round">
-                  <ul>
-                     <Repeater records-bind="$round" recordAlias="$match">
-                        <li>
-                           <span text-expr="{$match}[0]" />
-                           <NumberField mode="view" />
-                           <NumberField mode="view" />
-                           <span text-expr="{$match}[1]" />
-                        </li>
-                     </Repeater>
-                  </ul>
+            <div class="matchweektable flex-column gap-2x">
+               <Repeater records-bind="selectedGroup" recordAlias="$round" indexAlias="$mw">
+                  <Grid
+                     records-bind="$round"
+                     recordAlias="$match"
+                     columns={[
+                        {
+                           field: '0',
+                           header: {
+                              text: expr('"Round "  + {$mw}'),
+                              align: 'left',
+                           },
+                           align: 'right',
+                        },
+                        {
+                           header: 'Result',
+                           align: 'center',
+                           items: (
+                              <cx>
+                                 <NumberField mode="view" />
+                                 <span> : </span>
+                                 <NumberField mode="view" />
+                              </cx>
+                           ),
+                        },
+                        {
+                           field: '1',
+                           align: 'left',
+                        },
+                     ]}
+                  />
                </Repeater>
             </div>
          </Restate>
