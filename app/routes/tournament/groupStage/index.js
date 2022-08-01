@@ -1,6 +1,6 @@
 import { createFunctionalComponent, expr, Repeater, Restate } from 'cx/ui';
 import { Button, Grid, NumberField } from 'cx/widgets';
-import { getGroupColumns } from './columns';
+import { getGroupColumns, getGroupMatches } from './columns';
 import Controller from './Controller';
 
 export default createFunctionalComponent(({ groups, groupMatches }) => {
@@ -39,35 +39,7 @@ export default createFunctionalComponent(({ groups, groupMatches }) => {
 
             <div class="matchweektable flex-column gap-2x">
                <Repeater records-bind="selectedGroup" recordAlias="$round" indexAlias="$mw">
-                  <Grid
-                     records-bind="$round"
-                     recordAlias="$match"
-                     columns={[
-                        {
-                           field: '0',
-                           header: {
-                              text: expr('"Round "  + {$mw}'),
-                              align: 'left',
-                           },
-                           align: 'right',
-                        },
-                        {
-                           header: 'Result',
-                           align: 'center',
-                           items: (
-                              <cx>
-                                 <NumberField mode="view" />
-                                 <span> : </span>
-                                 <NumberField mode="view" />
-                              </cx>
-                           ),
-                        },
-                        {
-                           field: '1',
-                           align: 'left',
-                        },
-                     ]}
-                  />
+                  <Grid records-bind="$round" recordAlias="$match" columns={getGroupMatches()} />
                </Repeater>
             </div>
          </Restate>
