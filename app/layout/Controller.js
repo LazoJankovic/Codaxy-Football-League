@@ -1,11 +1,12 @@
 import { History } from 'cx/ui';
+import { getTournaments } from '../api/tournament';
 import { GET } from '../api/util/methods';
 import { supabase } from '../supabaseClient';
 import { showErrorToast } from '../util/toasts';
 
 export default {
    onInit() {
-      this.getTournaments();
+      this.getTournamentsInfo();
 
       this.addTrigger('scroll-reset', ['url'], () => {
          document.scrollingElement.scrollTop = 0;
@@ -40,14 +41,8 @@ export default {
       History.pushState({}, null, '~/');
    },
 
-   async getTournaments() {
-      try {
-         let { data, error } = await supabase.from('Codaxy Tournament').select('id,TournamentName');
-         if (error) throw error;
-         this.store.set('tournamentsInfo', data);
-      } catch (error) {
-         console.log(error);
-         showErrorToast(error.message);
-      }
+   async getTournamentsInfo() {
+      let data = await getTournaments();
+      if (data) this.store.set('tournamentsInfo', data);
    },
 };

@@ -14,12 +14,21 @@ export default {
 
    editResult(store) {
       let match = store.get('$match');
-      debugger;
       if (match[4]) {
          match.splice(4, 1);
-         return store.set('$match', [...match]);
+         store.set('$match', [...match]);
+         // return this.saveResult();
       }
       match[4] = 'editing';
       store.set('$match', [...match]);
    },
+
+   /*  async saveResult() {
+      try {
+         const { data, error } = await supabase
+            .from('Codaxy Tournament')
+            .update({ GroupStage: 'otherValue' })
+            .eq('some_column', 'someValue');
+      } catch {}
+   }, */
 };

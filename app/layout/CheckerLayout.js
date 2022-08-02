@@ -202,7 +202,7 @@ export const CheckerLayout = ({ children, nav }) => (
                />
             </Repeater>
             <div class="px-6 py-3 text-gray-400 text-sm" />
-            <NavItem text="Направи нови турнир" icon="adjustments" href="~/newleague" />
+            <NavItem text="Направи нови турнир" icon="adjustments" href="~/newtournament" />
 
             <div class="px-6 py-3 text-gray-400 text-sm">Main Menu</div>
             <NavItem text="Dashboard" icon="chart-bar" href="~/dashboard" />

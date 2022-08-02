@@ -102,10 +102,6 @@ export let getGroupMatches = () => {
                   class="w-fit"
                   mode-expr='{$match}[4] ? "edit" : "view" '
                   emptyText="__"
-                  // value-expr="{$match}[2]"
-                  // value={computable('$match', (match) => {
-                  //    return match[2];
-                  // })}
                   value={{
                      expr: '{$match}[2]',
                      set: (value, { store }) => {
@@ -128,10 +124,7 @@ export let getGroupMatches = () => {
                {/* temp */}
                <Button
                   onClick={(e, { store, controller }) => {
-                     // let index = store.get('$index');
-                     // let round = store.get('$round');
-                     //store.set('$match', match);
-                     return controller.invokeMethod('editResult', store);
+                     return controller.editResult(store);
                   }}
                   icon-expr='{$match}[4] ? "check" : "pencil"'
                   tooltip={{

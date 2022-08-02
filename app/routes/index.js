@@ -10,7 +10,7 @@ import { SandboxedRoute } from '../components/SandboxedRoute';
 import InvoiceRoutes from './invoices';
 import { PageNotImplemented } from '../components/PageNotImplemented';
 import Tournament from './tournament';
-import NewLeague from './newLeague';
+import NewTournament from './newTournament';
 
 export default () => (
    <cx>
@@ -28,8 +28,8 @@ export default () => (
                <Tournament />
             </Route>
 
-            <Route route="~/newleague" url-bind="url" prefix>
-               <NewLeague />
+            <Route route="~/newtournament" url-bind="url" prefix>
+               <NewTournament />
             </Route>
 
             <SandboxedRoute route="~/dashboard">

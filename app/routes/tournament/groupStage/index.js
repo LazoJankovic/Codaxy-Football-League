@@ -31,14 +31,14 @@ export default createFunctionalComponent(({ groups, groupMatches }) => {
                      onClick={(e, { store }) => {
                         let index = store.get('$index');
                         let selectedGroup = store.get('groupMatches')[groupLetters[index]];
-                        store.set('selectedGroup', selectedGroup);
+                        store.set('selectedGroupMatches', selectedGroup);
                      }}
                   />
                </Repeater>
             </div>
 
             <div class="matchweektable flex-column gap-2x">
-               <Repeater records-bind="selectedGroup" recordAlias="$round" indexAlias="$mw">
+               <Repeater records-bind="selectedGroupMatches" recordAlias="$round" indexAlias="$mw">
                   <Grid records-bind="$round" recordAlias="$match" columns={getGroupMatches()} />
                </Repeater>
             </div>

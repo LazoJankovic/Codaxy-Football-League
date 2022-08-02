@@ -1,13 +1,11 @@
 //import { supabase } from '../../supabaseClient';
-import { createClient } from '@supabase/supabase-js';
+import { addTournament } from '../../api/tournament';
 import { supabase } from '../../supabaseClient';
-import { leagueTemplate } from '../../util/newLeagueTemplate';
-import { createGroupsSchedule, createGroupStageSchedule, setupGroupStage } from '../../util/tournament/tournamentDraw';
+import { showErrorToast } from '../../util/toasts';
+import { createGroupStageSchedule, setupGroupStage } from '../../util/tournament/tournamentDraw';
 
 export default {
    onInit() {
-      //this.store.set('league', []);
-      console.log(leagueTemplate);
       this.store.set('playersData', [
          /* {
             playerName: 'Sanchez',
@@ -194,10 +192,14 @@ export default {
 
       this.store.set('groupStage', groupStage);
 
-      const { data, error } = await supabase
-         .from('Codaxy Tournament')
-         .insert([{ TournamentName: tournamentName, GroupStage: groupStage, GroupMatches: groupStageMatches }]);
-      console.log(data, error);
+      try {
+         ///todo
+         let { data, error } = await addTournament(tournamentName, groupStage, groupStageMatches);
+         if (error) throw error;
+      } catch (err) {
+         console.log(err);
+         showErrorToast(err);
+      }
    },
 
    expandRow(e, { store }) {
