@@ -19,7 +19,7 @@
       "@supabase/supabase-js": "^1.35.4",
       "casual": "^1.6.2",
       "core-js": "^3.20.3",
-      "cx": "^22.7.1",
+      "cx": "^22.8.1",
       "cx-immer": "^22.3.0",
       "cx-react": "^17.10.0",
       "heroicons": "^1.0.5",
